@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabaseClient";
+import type { User } from "@supabase/supabase-js";
 
 export default function BackOfficePage() {
   const router = useRouter();
   const supabase = createClient();
 
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -43,17 +44,20 @@ export default function BackOfficePage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-8">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-8">
       <h1 className="text-3xl font-bold mb-6">📊 ProofCircle Back Office</h1>
-      <p className="mb-6 text-gray-700">
-        Welcome, <strong>{user?.email}</strong>! You are logged in securely.
-      </p>
-      <button
-        onClick={handleLogout}
-        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
-      >
-        Logout
-      </button>
+      
+      <div className="bg-white p-6 rounded-lg shadow-md text-center w-full max-w-md">
+        <p className="mb-6 text-gray-700">
+          Welcome, <strong>{user?.email}</strong>! You are logged in securely.
+        </p>
+        <button
+          onClick={handleLogout}
+          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }
