@@ -1,6 +1,16 @@
+"use client"
+
 import Image from "next/image";
+import { createClient } from "@/lib/supabaseClient";
 
 export default function Home() {
+  // ✅ Debug check for environment variables
+  console.log("Supabase URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+
+  // ✅ Debug check for Supabase client
+  const supabase = createClient();
+  console.log("Supabase client test:", supabase);
+
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
